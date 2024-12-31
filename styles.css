@@ -112,13 +112,15 @@ form div input {
     height: 39px;
 }
 
-texarea {
+
+textarea {
     height: 161px;
 }
 
 .lista-tags {
     display: flex;
 }
+
 
 .lista-tags li {
     display: flex;
