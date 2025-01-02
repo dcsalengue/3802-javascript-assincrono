@@ -89,8 +89,14 @@ botaoPublicar.addEventListener("click", async (evento) => {
     const descricaoDoProjeto = document.getElementById("descricao").value;
     const tagsProjeto = Array.from(listaTags.querySelectorAll("p")).map((tag) => tag.textContent);
 
-    console.log(`${nomeDoProjeto}\r\n${descricaoDoProjeto}\r\n${tagsProjeto}\r\n`);
-
+    try {
+        const mensagem = await publicarProjeto(nomeDoProjeto, descricaoDoProjeto, tagsProjeto);
+        console.log(mensagem);
+        alert(mensagem);
+    } catch (error) {
+        console.error(error);
+        alert(error);
+    }
 });
 
 async function publicarProjeto(nomeDoProjeto, descricaoDoProjeto, tagsProjeto) {
