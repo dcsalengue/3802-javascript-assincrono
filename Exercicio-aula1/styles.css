@@ -1,0 +1,36 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --background-color: #00090E;
+    --offwhite: #E1E1E1;    
+    --rosa-destaque: #FD7BF0;
+    --rosa: #E465DF;
+    --cinza-medio: #888888;
+    --roxo-escuro: #211727;
+    --font-family: "Prompt", sans-serif;
+    --itens-background: #171D1F;
+    --verde-petroleo: #132E35;
+}
+
+
+
+body {
+    background-color: var(--background-color);
+    color: var(--cinza-medio);
+    font-family: var(--font-family);
+
+    display: flex;
+    justify-content: center;
+    align-items: start;
+
+    height: 100vh;
+    gap: 27px;
+    padding: 56px 0 144px 0;
+}
+aside{
+
+}
