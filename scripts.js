@@ -32,7 +32,7 @@ inputUpload.addEventListener("change", async (evento) => {
             imagemPrincipal.src = conteudoDoArquivo.url;
             nomeDaImagem.textContent = conteudoDoArquivo.nome;
         } catch (error) {
-            console.error("Erro na leitura do arquivo") ;
+            console.error("Erro na leitura do arquivo");
         }
     }
 });
@@ -56,15 +56,54 @@ async function verificaTagsDisponiveis(tagTexto) {
     })
 }
 
-inputTags.addEventListener("keypress",async (evento) => {
+inputTags.addEventListener("keypress", async (evento) => {
     if (evento.key === "Enter") {
         evento.preventDefault();
         const tagTexto = inputTags.value.trim();
-        if(tagTexto !== ""){
-            const tagNova = document.createElement("li");
-            tagNova.innerHTML = `<p>${tagTexto}</p> <img src="./img/close-black.svg" class="remove-tag">`;
-            listaTags.appendChild(tagNova);
-            inputTags.value = "";
+        if (tagTexto !== "") {
+            try {
+                const tagExiste = await verificaTagsDisponiveis(tagTexto);
+                if (tagExiste) {
+                    const tagNova = document.createElement("li");
+                    tagNova.innerHTML = `<p>${tagTexto}</p> <img src="./img/close-black.svg" class="remove-tag">`
+                    listaTags.appendChild(tagNova);
+                    inputTags.value = "";
+                } else {
+                    alert("Tag não foi encontrada.");
+                }
+            } catch (error) {
+                console.error("Erro ao verificar a existência da tag");
+                alert("Erro ao verificar a existência da tag. Verifique o console.")
+            }
+
+
         }
     }
 });
+
+const botaoPublicar = document.querySelector(".botao-publicar");
+
+botaoPublicar.addEventListener("click", async (evento) => {
+    evento.preventDefault();
+    const nomeDoProjeto = document.getElementById("nome").value;
+    const descricaoDoProjeto = document.getElementById("descricao").value;
+    const tagsProjeto = Array.from(listaTags.querySelectorAll("p")).map((tag) => tag.textContent);
+
+    console.log(`${nomeDoProjeto}\r\n${descricaoDoProjeto}\r\n${tagsProjeto}\r\n`);
+
+});
+
+async function publicarProjeto(nomeDoProjeto, descricaoDoProjeto, tagsProjeto) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            const deuCerto = Math.random() > 0.5;
+            if (deuCerto) {
+                resolve("Projeto publicado com sucesso.")
+            } else {
+                reject("Erro ao publicar o projeto.")
+            }
+        }, 2000)
+    })
+}
+
+
